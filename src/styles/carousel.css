@@ -1,0 +1,245 @@
+@import "https://unpkg.com/open-props" layer(design.system);
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200..700&display=swap");
+/* Source code of these utilities: https://github.com/mobalti/layout-craft/blob/main/lib/utilities.css */
+@import "https://www.unpkg.com/layout-craft@1.0.1/dist/utilities.css" layer(base.utilities);
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+:where(button) {
+    font-family: inherit;
+    cursor: pointer;
+    border: unset;
+}
+
+:root {
+    --surface-1: oklch(0.17 0 0);
+    --surface-2: oklch(0.24 0 0);
+    --surface-3: oklch(0.46 0 0);
+    --text-1: oklch(0.97 0 0);
+    --text-2: oklch(0.57 0 0);
+    --text-3: oklch(0.42 0 0);
+    --custom-radios: 10px;
+}
+
+
+section {
+    position: relative;
+    inline-size: 100%;
+    padding-block: var(--size-4);
+    overflow: hidden;
+}
+
+section h2 {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+}
+
+.title-genre {
+    color: var(--color-white);
+    font-size: 1rem;
+    margin-left: -10px;
+}
+
+.block {
+    padding: 5px;
+}
+
+.UserList {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.UserList::-webkit-scrollbar {
+    display: none;
+}
+
+.Card {
+    position: relative;
+    scroll-snap-align: start;
+    background-color: rgb(15, 15, 15);
+    border: var(--border);
+    border-radius: var(--custom-radios);
+    padding: 5px;
+    grid-column: span 1;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden !important;
+}
+
+.Card * {
+    height: auto;
+}
+
+.Card img {
+    --size: 285px;
+    border-radius: 5px;
+    width: 240px;
+    height: 100%;
+    block-size: var(--size) !important;
+    background: var(--gradient-8);
+}
+
+.Card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0)), linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+    /* Gradiente transparente para preto e preto para transparente */
+    z-index: 1;
+    background-size: 100% 60%, 100% 60%;
+    background-position: bottom, bottom;
+    background-repeat: no-repeat;
+}
+
+.name {
+    font-size: 1rem;
+    color: var(--color-white);
+    z-index: 100;
+    text-align: center;
+    margin-top: 1px;
+}
+
+.Card .Username {
+    color: var(--text-2);
+}
+
+.username {
+    font-size: 12px;
+    color: rgb(145, 145, 145);
+}
+
+.Card .Name,
+.Card .Username {
+    max-inline-size: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.Card .Name:hover,
+.Card .Username:hover {
+    text-decoration: underline;
+}
+
+.Card .RemoveBtn {
+    background: transparent;
+    border: unset;
+    border-radius: var(--radius-round);
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-start: var(--size-2);
+    cursor: pointer;
+}
+
+.Controls {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.Controls .Wrapper {
+    --_content: 800px;
+}
+
+a {
+    text-decoration: none !important;
+    padding: 5px;
+}
+
+.inline::after,
+.inline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.inline::after {
+    right: 0;
+    background: linear-gradient(to right, rgba(202, 7, 7, 0), var(--color-black-bg));
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .Controls {
+        display: none;
+    }
+
+    .inline::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -0px;
+        width: 100px;
+        z-index: 1000;
+        background: linear-gradient(to right, rgba(202, 7, 7, 0), var(--color-black-bg));
+        pointer-events: none;
+    }
+
+    .inline::before {
+        left: 0;
+        background: transparent;
+    }
+}
+
+.ControlsBtn {
+    inline-size: 44px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    block-size: 44px;
+    border-radius: var(--radius-round);
+    background-color: rgb(26, 26, 26);
+    border: var(--border);
+    color: var(--text-2);
+    transition: scale 0.2s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000000 !important;
+}
+
+.ControlsBtn:hover {
+    scale: 1.07;
+    color: var(--color-primary);
+}
+
+.ControlsBtn.previous {
+    inset-inline: 0;
+}
+
+.ControlsBtn.next {
+    inset-inline-end: 0;
+}
+
+@keyframes prev {
+    from {
+        visibility: hidden;
+    }
+}
+
+@keyframes next {
+    to {
+        visibility: hidden;
+    }
+}
